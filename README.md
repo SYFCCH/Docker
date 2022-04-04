@@ -31,14 +31,25 @@ systemctl start docker
 2.docker利用的是宿主机的内核，而不需要重新加载操作系统OS内核
 
 # Docker基本命令
-启动docker: systemctl start docker
-停止docker: systemctl stop docker
-重启docker: systemctl restart docker
-查看docker状态: systemctl status docker
-开机启动: systemctl enable docker
-查看docker概要信息: docker info
-查看docker总体帮助文档: docker --help
-查看docker命令帮助文档: docker 具体命令 --help
+启动docker: systemctl start docker  
+停止docker: systemctl stop docker  
+重启docker: systemctl restart docker  
+查看docker状态: systemctl status docker  
+开机启动docker: systemctl enable docker  
+查看docker概要信息: docker info  
+查看docker总体帮助文档: docker --help  
+查看docker命令帮助文档: docker 具体命令 --help  
 
+查看主机上的镜像: docker images  
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)  
+同一仓库源可以有多个TAG版本,如果  不指定的话默认是用最新的  
+docker search 镜像名  ： 查看官网的镜像   后面加 --limit N，可以只列出N个  
+docker pull 镜像名字(:TAG)不指定TAG的话那就是下载最新版,可以用来下载镜像  
+docker system df 可以查看docker空间  
+docker rmi -f 镜像名/镜像ID 强制删除镜像![img_3.png](img_3.png)
 
+面试题：docker虚悬镜像是什么？  
+仓库名、标签都是<none>的镜像，俗称虚悬镜像dangling image
 
+# Docker容器命令
