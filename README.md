@@ -53,3 +53,4 @@ docker rmi -f 镜像名/镜像ID 强制删除镜像![img_3.png](img_3.png)
 仓库名、标签都是<none>的镜像，俗称虚悬镜像dangling image
 
 # Docker容器命令
+1
