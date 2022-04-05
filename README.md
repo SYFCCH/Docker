@@ -49,7 +49,7 @@ systemctl start docker
 ---
 **镜像命令**
 查看主机上的镜像: ```docker images```  
-![img_1.png](img_1.png)
+![img_1.png](img_1.png)  
 ![img_2.png](img_2.png)  
 同一仓库源可以有多个TAG版本,如果  不指定的话默认是用最新的  
 ````
@@ -88,7 +88,7 @@ docker run -it centos:centos7 /bin/bash
 新开一个终端然后输入
 docker ps 
 ```
-![img_6.png](img_6.png)
+![img_6.png](img_6.png)  
 docker ps [OPTIONS]说明(常用)  
 ```
 -a :列出当前所有运行的＋历史上运行过的  
@@ -96,7 +96,7 @@ docker ps [OPTIONS]说明(常用)
 -n :显示最近n个创建的容器  
 -q :静默模式，只显示容器编号  
 ```
-![img_7.png](img_7.png)
+![img_7.png](img_7.png)  
 3.进入容器后退出容器  
 * ```exit```，容器停止 
 * ctrl + p + q,退出容器后，容器不停止  
@@ -114,24 +114,24 @@ docker ps [OPTIONS]说明(常用)
 1) 启动守护式容器(后台服务器)  docker run -d 容器名  
 大多数情况下我们都希望docker的服务是在后台运行的，不过一旦用后台，他前台没有，docker会觉得他没事情干就自杀了，直接就退出了
  所以我们还是以前台进入命令行告诉docker这个容器我们还在使用   
-* 下面以redis来演示前后台
-![img_8.png](img_8.png)
-当然我们平常redis都是后台启动的，所以下面演示后台守护启动  
-![img_9.png](img_9.png)
+* 下面以redis来演示前后台  
+![img_8.png](img_8.png)  
+当然我们平常redis都是后台启动的，所以下面演示后台守护启动   
+![img_9.png](img_9.png)  
 
 ---
 2) 浏览容器的日志信息
 ```
 docker logs 容器id
 ```
-![img_10.png](img_10.png)
+![img_10.png](img_10.png)  
 
 ---
 3) 查看容器细节
 ```
 docker inspect 容器ID
 ```
-包含大量的json串
+包含大量的json串    
 ![img_11.png](img_11.png)  
 **每一个容器**都是一个简易微小的Linux  
 
@@ -141,44 +141,44 @@ docker inspect 容器ID
 docker run -it centos:centos7 /bin/bash
 然后ctrl + p + q退出容器但是不停止容器的运行
 ```
-![img_12.png](img_12.png)
+![img_12.png](img_12.png)  
 接着如果我们要进入这个容器输入:  
 ``docker exec -it 容器ID/容器名 /bin/bash``  
-![img_13.png](img_13.png)
+![img_13.png](img_13.png)  
 exec是在容器中打开新的终端，并且可以启动新的进程，用exit退出，不会导致容器的停止
 
 还有一个指令可以进入正在运行的容器
 ``docker attach 容器ID``
-attach直接进入终端，不会启动新的进程，用exit退出，容器停止  
-![img_14.png](img_14.png)
+attach直接进入终端，不会启动新的进程，用exit退出，容器停止   
+![img_14.png](img_14.png)  
 **平常工作中用exec进入容器，这样退出后后续的人也能进入使用**
 
 ---
-5) 进入之前后台运行的redis容器
-![img_17.png](img_17.png)
-![img_15.png](img_15.png)
+5) 进入之前后台运行的redis容器  
+![img_17.png](img_17.png)  
+![img_15.png](img_15.png)  
 
 ---
 6) 从容器内把文件发送到主机上  
-``docker cp 容器ID:容器内路径 目的主机路径`` 把指定容器内的a.txt文件发到主机上
-![img_22.png](img_22.png)
+``docker cp 容器ID:容器内路径 目的主机路径`` 把指定容器内的a.txt文件发到主机上  
+![img_22.png](img_22.png)  
 ---
 7) **导入和导出容器**  容器搬楼操作，很常用很重要  
 ```导入容器的指令 cat 文件名.tar | docker import - 镜像用户/镜像名:镜像版本号```  
 ```导出容器的指令 docker export 容器ID > 文件名.tar```  
 测试：  
 我在容器内创建一个叫a.txt的文件，然后退出容器，docker export 导出容器成tar包，之后删除该容器  
-![img_20.png](img_20.png)
-![img_18.png](img_18.png)
-导入容器后发现a.txt还在，证明这个就是之前的容器
-![img_16.png](img_16.png)
-![img_19.png](img_19.png)
+![img_20.png](img_20.png)  
+![img_18.png](img_18.png)  
+导入容器后发现a.txt还在，证明这个就是之前的容器  
+![img_16.png](img_16.png)  
+![img_19.png](img_19.png)  
 ---
 # Docker 镜像
-![img_25.png](img_25.png)
+![img_25.png](img_25.png)  
 1.镜像的分层概念  
-以pull为例，下载的时候是一层一层下载的
-![img_26.png](img_26.png)
+以pull为例，下载的时候是一层一层下载的  
+![img_26.png](img_26.png)  
 ---
 **UnionFS（联合文件系统）：**  
 Union文件系统（UnionFS）是一种分层、轻量级并且高性能的文件系统，它支持对文件系统的修改作为一次提交来一层层的叠加，同时可以将不同目录挂载到同一个虚拟文件系统下(unite several directories into a single virtual filesystem)。Union 文件系统是 Docker 镜像的基础。镜像可以通过分层来进行继承，基于基础镜像（没有父镜像），可以制作各种具体的应用镜像。
@@ -203,5 +203,5 @@ Docker为什么要用这种分层结构
 **重点理解**  
 Docker镜像层都是只读的，容器层是可写的
 当容器启动时，一个新的可写层被加载到镜像的顶部。
-这一层通常被称作“容器层”，“容器层”之下的都叫“镜像层”。
-![img_28.png](img_28.png)
+这一层通常被称作“容器层”，“容器层”之下的都叫“镜像层”。  
+![img_28.png](img_28.png)  
