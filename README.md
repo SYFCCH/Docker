@@ -62,23 +62,51 @@ docker rmi -f 镜像名/镜像ID 强制删除镜像![img_3.png](img_3.png)
 仓库名、标签都是<none>的镜像，俗称虚悬镜像dangling image
 ---
 **Docker容器命令**  
+1.启动容器
 ````
-1.docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ````
-[OPTIONS]:  
-* --name="容器名字" :指定容器新名称
-* -d: 后台运行
-* -i: 以交互模式启动容器，通常与-i同时使用
-* -t: 为容器重新分配一个伪输入终端，通常与-i同时使用
-* -P: 随机端口映射
-* -p: 指定端口映射  
+[OPTIONS]:
+
+```
+--name="容器名字" :指定容器新名称
+-d: 后台运行
+-i: 以交互模式启动容器，通常与-i同时使用
+-t: 为容器重新分配一个伪输入终端，通常与-i同时使用
+-P: 随机端口映射
+-p: 指定端口映射  
+```
 ![img_4.png](img_4.png)
 
-例子:
+例子: 以交互模式启动一个容器
 ```
 docker run -it centos:centos7 /bin/bash
 ```
 ![img_5.png](img_5.png)  
-2.进入容器后退出容器
-```exit```  
-3.查看当前
+2.查看当前正在运行的容器
+```
+新开一个终端然后输入
+docker ps 
+```
+![img_6.png](img_6.png)
+docker ps [OPTIONS]说明(常用)  
+```
+-a :列出当前所有运行的＋历史上运行过的  
+-l :显示最近创建的容器  
+-n :显示最近n个创建的容器  
+-q :静默模式，只显示容器编号  
+```
+![img_7.png](img_7.png)
+3.进入容器后退出容器  
+* ```exit```，容器停止 
+* ctrl + p + q,退出容器后，容器不停止
+4.其他容器操作
+```
+启动已停止运行的容器 docker start 容器ID/容器名
+重启容器 docker restart 容器ID/容器名
+停止容器 docker stop 容器ID/容器名
+强制停止容器 docker kill 容器ID/容器名
+删除已停止的容器 docker rm  容器ID
+```
+5.重要
+
