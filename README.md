@@ -108,6 +108,7 @@ docker ps [OPTIONS]说明(常用)
 停止容器 docker stop 容器ID/容器名
 强制停止容器 docker kill 容器ID/容器名
 删除已停止的容器 docker rm  容器ID
+强制删除 docker rm -f 容器ID
 ```
 5.重要  
 1) 启动守护式容器(后台服务器)  docker run -d 容器名  
@@ -137,10 +138,31 @@ docker run -it centos:centos7 /bin/bash
 ```
 ![img_12.png](img_12.png)
 接着如果我们要进入这个容器输入:  
-``docker exec -it 进程名 /bin/bash``  
+``docker exec -it 容器ID/容器名 /bin/bash``  
 ![img_13.png](img_13.png)
 exec是在容器中打开新的终端，并且可以启动新的进程，用exit退出，不会导致容器的停止
 
 还有一个指令可以进入正在运行的容器
-``docker attach ``
-attach直接进入终端，不会启动新的进程，用exit退出，容器停止
+``docker attach 容器ID``
+attach直接进入终端，不会启动新的进程，用exit退出，容器停止  
+![img_14.png](img_14.png)
+**平常工作中用exec进入容器，这样退出后后续的人也能进入使用**
+
+5) 进入之前后台运行的redis容器
+![img_17.png](img_17.png)
+![img_15.png](img_15.png)
+6) 从容器内把文件发送到主机上  
+``docker cp 容器ID:容器内路径 目的主机路径`` 把指定容器内的a.txt文件发到主机上
+![img_22.png](img_22.png)
+7) **导入和导出容器**  容器搬楼操作，很常用很重要  
+```导出容器的指令 docker export 容器ID > 文件名.tar```  
+测试：  
+我在容器内创建一个叫a.txt的文件，然后退出容器，docker export 导出容器成tar包，之后删除该容器  
+![img_20.png](img_20.png)
+![img_18.png](img_18.png)
+```导入容器的指令 cat 文件名.tar | docker import - 镜像用户/镜像名:镜像版本号```  
+导入容器后发现a.txt还在，证明这个就是之前的容器
+![img_16.png](img_16.png)
+![img_19.png](img_19.png)
+# Docker 镜像
+1.镜像的分层概念
