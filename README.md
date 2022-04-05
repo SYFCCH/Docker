@@ -71,7 +71,7 @@ docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 --name="容器名字" :指定容器新名称
 -d: 后台运行
--i: 以交互模式启动容器，通常与-i同时使用
+-i: 以交互模式启动容器，通常与-t同时使用
 -t: 为容器重新分配一个伪输入终端，通常与-i同时使用
 -P: 随机端口映射
 -p: 指定端口映射  
@@ -99,7 +99,8 @@ docker ps [OPTIONS]说明(常用)
 ![img_7.png](img_7.png)
 3.进入容器后退出容器  
 * ```exit```，容器停止 
-* ctrl + p + q,退出容器后，容器不停止
+* ctrl + p + q,退出容器后，容器不停止  
+
 4.其他容器操作
 ```
 启动已停止运行的容器 docker start 容器ID/容器名
@@ -108,5 +109,38 @@ docker ps [OPTIONS]说明(常用)
 强制停止容器 docker kill 容器ID/容器名
 删除已停止的容器 docker rm  容器ID
 ```
-5.重要
+5.重要  
+1) 启动守护式容器(后台服务器)  docker run -d 容器名  
+大多数情况下我们都希望docker的服务是在后台运行的，不过一旦用后台，他前台没有，docker会觉得他没事情干就自杀了，直接就退出了
+ 所以我们还是以前台进入命令行告诉docker这个容器我们还在使用   
+* 下面以redis来演示前后台
+![img_8.png](img_8.png)
+当然我们平常redis都是后台启动的，所以下面演示后台守护启动  
+![img_9.png](img_9.png)
 
+2) 浏览容器的日志信息
+```
+docker logs 容器id
+```
+![img_10.png](img_10.png)
+3) 查看容器细节
+```
+docker inspect 容器ID
+```
+包含大量的json串
+![img_11.png](img_11.png)  
+**每一个容器**都是一个简易微小的Linux  
+4) 进入正在运行的容器
+```
+docker run -it centos:centos7 /bin/bash
+然后ctrl + p + q退出容器但是不停止容器的运行
+```
+![img_12.png](img_12.png)
+接着如果我们要进入这个容器输入:  
+``docker exec -it 进程名 /bin/bash``  
+![img_13.png](img_13.png)
+exec是在容器中打开新的终端，并且可以启动新的进程，用exit退出，不会导致容器的停止
+
+还有一个指令可以进入正在运行的容器
+``docker attach ``
+attach直接进入终端，不会启动新的进程，用exit退出，容器停止
