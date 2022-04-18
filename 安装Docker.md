@@ -14,13 +14,13 @@ docker-engine
 2.yum -y install gcc-c++  
 
 #### 3.配置镜像仓库  
-1.yum install -y yum-utils  
-2. 用阿里云的镜像    
+1.yum install -y yum-utils    
+2. 用阿里云的镜像     
 ``
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo   
 ``
 ![img_65.png](img_65.png)  
-3.让yum安装快一些 
+3.让yum安装快一些   
 yum makecache fast  
 
 #### 4.安装docker引擎  
