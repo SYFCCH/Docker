@@ -27,3 +27,14 @@ yum makecache fast
 yum install docker-ce docker-ce-cli containerd.io  
 
 #### 5.配置阿里云镜像加速
+``
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+"registry-mirrors": ["https://u1t69hx8.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+``  
+![img_66.png](img_66.png)
