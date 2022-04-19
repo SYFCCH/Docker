@@ -90,8 +90,8 @@ docker bulid -t centos7java8:1.5 .
 ![img_111.png](img_111.png)     
 4. 启动容器  
 ![img_112.png](img_112.png)   
-![img_113.png](img_113.png)  
-5. 测试微服务容器   
+`` docker run -d -p 6001:6001 syf_docker:1.6``
+
 
 
 
