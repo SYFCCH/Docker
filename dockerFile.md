@@ -48,5 +48,35 @@ CMD /bin/bash
 ```  
 
 3. 构建docker build -t  新镜像名字:TAG . 
-**TAG后面有个 空格加点 **
+**TAG后面有个 空格加点 **  
+![img_104.png](img_104.png)  
+```
+docker bulid -t centos7java8:1.5 .
+```
+![img_99.png](img_99.png)  
+![img_100.png](img_100.png)  
 
+4. 运行镜像    
+![img_102.png](img_102.png)   
+会发现初始目录是 local，也就是我们Dockerfile  ENV MYPATH  然后WORKDIR $MYPATH 设置的初始工作路径  
+5. 验证  
+![img_103.png](img_103.png)  
+
+##### 上述案例回顾了docker可以通过分层来进行继承，一层层叠加，基于基础就镜像(不是父镜像！！！)，可以制作各种镜像
+# 虚悬镜像(dangling image)  
+仓库名和标签都是<none>的镜像  
+面试题:请你说说什么是虚悬镜像  
+是平常构建或者删除镜像时候出现错误导致仓库和标签都是<none>  
+查看虚悬镜像的命令  
+``docker image ls -f dangling=true``   
+
+ ![img_105.png](img_105.png)  
+ 删除虚悬镜像的命令  
+ ``docker image prune``  
+ 
+
+
+
+# Docker微服务实战  
+1. 通过IDEA新建一个普通微服务模块   
+2. 通过dockerfile发布微服务部署到docker容器   
