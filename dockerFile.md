@@ -75,5 +75,25 @@ docker bulid -t centos7java8:1.5 .
  ``docker image prune``  
 
 # Docker微服务实战  
-1. 通过IDEA新建一个普通微服务模块   
-2. 通过dockerfile发布微服务部署到docker容器   
+1. 通过IDEA新建一个普通微服务模块,用maven打包成jar包然后上传到Linux   
+![img_106.png](img_106.png)  
+![img_108.png](img_108.png)  
+![img_109.png](img_109.png)  
+
+2. 通过dockerfile发布微服务部署到docker容器     
+最好在当前路径下vim   Dockerfile   
+![img_110.png](img_110.png)   
+``docker build -t syf_docker:1.6 .``  
+-t是取名字的标签  
+详情访问[Docker官网](https://docs.docker.com/engine/reference/commandline/build/)  
+3. 建造容器  
+![img_111.png](img_111.png)     
+4. 启动容器  
+![img_112.png](img_112.png)   
+![img_113.png](img_113.png)  
+5. 测试微服务容器   
+
+
+
+
+
