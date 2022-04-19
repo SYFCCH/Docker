@@ -73,9 +73,6 @@ docker bulid -t centos7java8:1.5 .
  ![img_105.png](img_105.png)  
  删除虚悬镜像的命令  
  ``docker image prune``  
- 
-
-
 
 # Docker微服务实战  
 1. 通过IDEA新建一个普通微服务模块   
