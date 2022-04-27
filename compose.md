@@ -25,6 +25,60 @@ docker-compose.yml
 ###### 2.工程project
 由一组关联的应用容器组成的一个完整业务单元，在 docker-compose.yml 文件中定义。     
 
+
+### Compose使用  
+1.编写docker-compose.yml 文件  
+
+下面以使用一个springboot项目jar包，mysql，redis为例  
+```
+version: "3"
+services:
+  microService:
+    image: zzyy_docker:1.6
+    container_name: ms01
+    ports:
+      - "6001:6001"
+    volumes:
+      - /app/microService:/data
+    networks: 
+      - atguigu_net 
+    depends_on: 
+      - redis
+      - mysql
+  redis:
+    image: redis:6.0.8
+    ports:
+      - "6379:6379"
+    volumes:
+      - /app/redis/redis.conf:/etc/redis/redis.conf
+      - /app/redis/data:/data
+    networks: 
+      - atguigu_net
+    command: redis-server /etc/redis/redis.conf
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: '123456'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'no'
+      MYSQL_DATABASE: 'db2021'
+      MYSQL_USER: 'zzyy'
+      MYSQL_PASSWORD: 'zzyy123'
+    ports:
+       - "3306:3306"
+    volumes:
+       - /app/mysql/db:/var/lib/mysql
+       - /app/mysql/conf/my.cnf:/etc/my.cnf
+       - /app/mysql/init:/docker-entrypoint-initdb.d
+    networks:
+      - atguigu_net
+    command: --default-authentication-plugin=mysql_native_password #解决外部无法访问
+networks: 
+   atguigu_net: 
+```
+
+2. 执行docker-compose up -d
+
+
 ### Compose 常用命令   
 ```
 docker-compose -h                           # 查看帮助
